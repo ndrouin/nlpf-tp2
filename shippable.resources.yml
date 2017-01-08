@@ -14,7 +14,7 @@ resources:
         - 8080:8080
 
   - name: google-cloud
-    type: gcr 
+    type: cluster 
     integration: gcr_integration
     pointer:
       sourceName: "cluster-1"

@@ -2,5 +2,6 @@ jobs:
   - name: docker-image-manifest
     type: manifest
     steps:
-      - IN: docker-img 
+      - IN: docker-img
+      - IN: docker-img-opts
       - TASK: managed

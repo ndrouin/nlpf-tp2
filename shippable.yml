@@ -5,3 +5,11 @@ build:
     pull: true
   ci:
     - docker pull ndrouin/nlpf-tp2:latest
+  integrations:
+    notifications:
+      - integrationName: triggerDocker
+      type: webhook
+      payload:
+        - versionName=$BRANCH.$BUILD_NUMBER  
+      on_success: always
+      on_failure: never

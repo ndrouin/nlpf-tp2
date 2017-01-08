@@ -12,3 +12,10 @@ resources:
     version:
       portMappings:
         - 8080:8080
+
+  - name: google-cloud
+    type: cluster
+    integration: gcr_integration
+    pointer:
+      sourceName: "cluster-1"
+      region: "europe-west1-c"

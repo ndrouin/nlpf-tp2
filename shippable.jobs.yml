@@ -5,3 +5,10 @@ jobs:
       - IN: docker-img
       - IN: docker-img-opts
       - TASK: managed
+
+  - name: deploy-prod
+    type: deploy
+    steps:
+      - IN: docker-image-manifest
+      - IN: google-cloud
+      - IN: docker-img-opts 

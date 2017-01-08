@@ -3,4 +3,5 @@ build:
     image_name: ndrouin/nlpf-tp2
     image_tag: latest
     pull: true
-
+  ci:
+    - docker pull ndrouin/nlpf-tp2:latest

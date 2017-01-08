@@ -1,0 +1,14 @@
+resources:
+  - name: docker-img
+    type: image
+    integration: docker_hub_integration
+    pointer:
+      sourceName: ndrouin/nlpf-tp2
+    seed:
+      versionName: latest
+
+  - name: docker-img-opts
+    type: dockerOptions
+    version:
+      portMappings:
+        - 8080:8080

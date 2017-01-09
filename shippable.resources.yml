@@ -13,9 +13,9 @@ resources:
       portMappings:
         - 8080:8080
 
-  - name: google-cloud
+  - name: aws
     type: cluster 
-    integration: GKE 
+    integration: AWS-integration 
     pointer:
-      sourceName: "cluster-1"
-      region: "europe-west1-c"
+      sourceName: "cluster"
+      region: "eu-west-1b"

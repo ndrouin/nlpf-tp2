@@ -18,4 +18,4 @@ resources:
     integration: AWS-integration 
     pointer:
       sourceName: "cluster"
-      region: "eu-west-1b"
+      region: "eu-west-1"

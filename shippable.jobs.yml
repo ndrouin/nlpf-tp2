@@ -10,5 +10,5 @@ jobs:
     type: deploy
     steps:
       - IN: docker-image-manifest
-      - IN: google-cloud
+      - IN: aws 
       - IN: docker-img-opts 

@@ -17,5 +17,5 @@ resources:
     type: cluster 
     integration: GKE 
     pointer:
-      sourceName: "cluster-1"
+      sourceName: "gke-cluster-1-default-pool-ca661a38-grp"
       region: "europe-west1-c"

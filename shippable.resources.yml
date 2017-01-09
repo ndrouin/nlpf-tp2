@@ -10,8 +10,10 @@ resources:
   - name: docker-img-opts
     type: dockerOptions
     version:
+      memory: 1024
+      cpuShares: 1 
       portMappings:
-        - 8080:8080
+        - "8080:8080"
 
   - name: aws
     type: cluster 

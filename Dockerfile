@@ -29,7 +29,6 @@ WORKDIR /root/easywebsitesapp
 RUN chmod u+x /root/easywebsitesapp/sbt
 RUN /root/easywebsitesapp/sbt -batch -sbt-create
 RUN /root/easywebsitesapp/sbt -sbt-create jetty:start
-ENTRYPOINT /root/easywebsitesapp/sbt -sbt-create jetty:start shell
 
 #open firewall
 EXPOSE 8080

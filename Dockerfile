@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM jetty
 MAINTAINER ndrouin
 ENV LANG fr_FR.UTF-8
 
@@ -7,7 +7,7 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 #go home
 WORKDIR /root
-
+ 
 #install conscript
 RUN PATH=$PATH:~/bin
 RUN export PATH
@@ -28,7 +28,9 @@ RUN /root/.conscript/bin/g8 scalatra/scalatra-sbt --organization=easywebsites --
 WORKDIR /root/easywebsitesapp
 RUN chmod u+x /root/easywebsitesapp/sbt
 RUN /root/easywebsitesapp/sbt -batch -sbt-create
-RUN /root/easywebsitesapp/sbt -sbt-create jetty:start
+RUN ./sbt package
+RUN cp /root/easywebsitesapp/target/scala-2.12/easywebsitesapp_2.12-1.0.war /var/lib/jetty/webapps/root.war
+ENTRYPOINT jetty.sh start && tail -f /dev/null
 
 #open firewall
 EXPOSE 8080

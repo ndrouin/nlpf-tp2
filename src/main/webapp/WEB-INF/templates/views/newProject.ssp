@@ -1,0 +1,77 @@
+{{if .Add}}
+<div class="alert alert-success">
+  Contrepartie ajout&eacute;e
+</div>
+{{end}}
+{{if .Delete}}
+<div class="alert alert-danger">
+  Contrepartie supprim&eacute;e
+</div>
+{{end}}
+<div class="col-md-4" style="margin: 5px;">                                     
+  <div class="panel-heading">                                            
+    <h3 class="alert alert-info">Mon projet</h3>                              
+  </div>                                                                   
+  <div class="panel-body">                                               
+    <form accept-charset="UTF-8" role="form" method="POST" action="addProject">                            
+      <fieldset> 
+        <div class="form-group">
+          <input type="text" maxlength="255" class="form-control" id="project_name" name="project_name" placeholder="Nom du projet" required>
+        </div>
+        <div class="form-group">
+          <label for="comment">Description:</label>
+          <textarea class="form-control" rows="5" id="description" name="description" minlength="140" placeholder="Description" required>
+          </textarea>
+        </div>
+        <div class="form-group">
+          <input type="text"  maxlength="255" class="form-control" id="author_name" name="author_name" placeholder="Auteur" required>
+        </div>
+        <div class="form-group">
+          <input type="email" maxlength="255"  class="form-control" id="email" name="email" placeholder="Contact" required>
+        </div>
+        {{if .Delete}}
+        <input class="btn btn-lg btn-success btn-block disabled" type="submit" value="Enregister"> 
+        {{else}}
+        {{if .HasOrphanCounterpart}}
+        <input class="btn btn-lg btn-success btn-block" type="submit" value="Enregister"> 
+        {{else}}
+        <input class="btn btn-lg btn-success btn-block disabled" type="submit" value="Enregister"> 
+        {{end}}
+        {{end}}
+      </fieldset>                                                          
+    </form>                                                            
+  </div>
+</div>
+</div>
+<div class="col-md-4" style="margin: 5px;">                                     
+  <div class="panel-heading" >                                            
+    <h3 class="alert alert-info">Contreparties</h3>                              
+  </div>                                                                   
+  <div class="panel-body">                                               
+    <form accept-charset="UTF-8" role="form" method="POST" action="addCounterpart"> 
+      <fieldset> 
+        <div class="form-group">
+          <input type="text" maxlength="255"  class="form-control" id="title" name="title" placeholder="Titre" required>
+        </div>
+        <div class="form-group">
+          <input type="number" min="1"  class="form-control" id="value" name="value" placeholder="Valeur (en Euros / mois)" required>
+        </div>
+
+        <div class="form-group">
+          <label for="comment">Description:</label>
+          <textarea class="form-control" id="description" rows="5" minlength="140" name="description" placeholder="Description" required></textarea>
+        </div>
+        <input class="btn btn-lg btn-success btn-block" type="submit" value="Ajouter une contrepartie"> 
+      </fieldset>                                                          
+    </form>   
+    <div class="alert alert-info" style="margin-top: 20px;"><h1>Liste des contreparties</h1></div>
+    {{ range .Counterparts }}
+    <div class="alert alert-warning" style="margin-top: 20px;"><h2>{{.Name}} - {{.Value}}&euro;&#47;mois</h2></div>
+    <div><p style="word-wrap: break-word;">{{.Description}}</p></div>
+    <form accept-charset="UTF-8" role="form" method="POST" action="deleteCounterpart"> 
+      <input type="hidden" id="id" name="id" value="{{.Id}}">
+      <input class="btn btn-danger btn-block" style="width: 250px;" type="submit" value="Supprimer"> 
+    </form>
+    {{end}}
+  </div>
+</div> 

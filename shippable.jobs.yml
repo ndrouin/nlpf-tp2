@@ -4,7 +4,6 @@ jobs:
     steps:
       - IN: docker-img
       - IN: docker-img-opts
-      - IN: github
       - TASK: managed
 
   - name: docker-image-manifest-2

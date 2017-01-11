@@ -21,3 +21,10 @@ resources:
     pointer:
       sourceName: "cluster"
       region: "eu-west-1"
+  
+  - name: aws2
+    type: cluster 
+    integration: AWS-integration 
+    pointer:
+      sourceName: "cluster2"
+      region: "eu-west-1"

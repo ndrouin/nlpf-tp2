@@ -12,3 +12,10 @@ jobs:
       - IN: docker-image-manifest
       - IN: aws 
       - IN: docker-img-opts 
+  
+  - name: deploy-pre-prod
+    type: deploy
+    steps:
+      - IN: docker-image-manifest
+      - IN: aws2 
+      - IN: docker-img-opts 

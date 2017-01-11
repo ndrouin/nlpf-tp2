@@ -7,6 +7,14 @@ resources:
     seed:
       versionName: latest
 
+  - name: docker-img-2
+    type: image
+    integration: docker_hub_integration
+    pointer:
+      sourceName: ndrouin/nlpf-tp2
+    seed:
+      versionName: pre-prod
+  
   - name: docker-img-opts
     type: dockerOptions
     version:

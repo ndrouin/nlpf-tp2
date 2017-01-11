@@ -6,6 +6,13 @@ jobs:
       - IN: docker-img-opts
       - TASK: managed
 
+  - name: docker-image-manifest-2
+    type: manifest
+    steps:
+      - IN: docker-img
+      - IN: docker-img-opts
+      - TASK: managed
+  
   - name: deploy-prod
     type: deploy
     steps:
@@ -16,6 +23,6 @@ jobs:
   - name: deploy-pre-prod
     type: deploy
     steps:
-      - IN: docker-image-manifest
+      - IN: docker-image-manifest-2
       - IN: aws2 
       - IN: docker-img-opts 

@@ -27,7 +27,7 @@ class ControllerServlet extends EasywebsitesappStack {
   contentType="text/html"
 
  
-  email := params.get("email")
+ /* email := params.get("email")
   password := params.get("password")
   //get result of authentification
   result := model.Connection(email, password)
@@ -36,7 +36,7 @@ class ControllerServlet extends EasywebsitesappStack {
     ctx.Redirect("/connect/")
   } else {
     ctx.Render("connection_error.html", nil)
-  }
+  }*/
 
   ssp("/connection")
   }

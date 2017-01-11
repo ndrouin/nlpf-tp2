@@ -8,6 +8,15 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 #go home
 WORKDIR /root
  
+#install vim
+RUN apt-get update -y
+RUN apt-get install vim -y
+ADD colors /etc/vim/colors
+ADD vimrc.local /etc/vim
+
+#install git
+RUN apt-get install git -y
+
 #install conscript
 RUN PATH=$PATH:~/bin
 RUN export PATH
@@ -30,8 +39,20 @@ RUN chmod u+x /root/easywebsitesapp/sbt
 RUN /root/easywebsitesapp/sbt -batch -sbt-create
 RUN ./sbt package
 RUN cp /root/easywebsitesapp/target/scala-2.12/easywebsitesapp_2.12-1.0.war /var/lib/jetty/webapps/root.war
+
+#get sources
+WORKDIR /root
+RUN git clone https://github.com/ndrouin/nlpf-tp2.git
+#change default sources
+RUN cp -rf /root/nlpf-tp2/src/ /root/easywebsitesapp/
+
+#add run script
+WORKDIR /root/easywebsitesapp
+ADD run.sh /root/easywebsitesapp
+RUN chmod +x run.sh
+
+#default command
 ENTRYPOINT jetty.sh start && tail -f /dev/null
 
 #open firewall
 EXPOSE 8080
-

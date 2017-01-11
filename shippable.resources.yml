@@ -28,3 +28,11 @@ resources:
     pointer:
       sourceName: "cluster2"
       region: "eu-west-1"
+
+  - name: github
+    type: gitRepo
+    integration: github
+    pointer:
+      sourceName: ndrouin/nlpf-tp2
+      branch: master
+

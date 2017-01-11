@@ -31,7 +31,7 @@ resources:
 
   - name: github
     type: gitRepo
-    integration: github
+    integration: git
     pointer:
       sourceName: ndrouin/nlpf-tp2
       branch: master

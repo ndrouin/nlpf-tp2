@@ -27,7 +27,8 @@ libraryDependencies ++= Seq(
   "javax.servlet" % "javax.servlet-api" % "3.1.0" % "provided",
   "org.mongodb" %% "casbah" % "3.1.1",
   "org.json4s" %% "json4s-jackson" % "3.5.0",
-  "org.json4s" %% "json4s-mongo" % "3.5.0"
+  "org.json4s" %% "json4s-mongo" % "3.5.0",
+  "net.liftweb" %% "lift-json" % "3.0.1"
 )
 
 scalateTemplateConfig in Compile := {

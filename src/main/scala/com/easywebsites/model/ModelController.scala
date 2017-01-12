@@ -1,6 +1,14 @@
 package com.easywebsites.app
 
 import com.mongodb.casbah.Imports._
+import scala.util.parsing.json._
+import net.liftweb.json._
+
+case class User (
+  username : String,
+  password: String,
+  name: String
+)
 
 class ModelController() {
 
@@ -10,6 +18,9 @@ class ModelController() {
   def getUser () : String = {
     val collection = db("users")
     val user = collection.findOne(MongoDBObject("username" -> "admin"))
-    return user.getOrElse("username").toString
+    implicit val formats = DefaultFormats
+    val json = parse(user.getOrElse(0).toString)
+    val u = json.extract[User]     
+    return u.name
   }
 }

@@ -5,32 +5,53 @@ import scala.util.parsing.json._
 import net.liftweb.json._
 
 case class User (
-  username : String,
-  password: String,
-  firstname: String,
-  lastname: String
-)
+    username : String,
+    password: String,
+    firstname: String,
+    lastname: String
+    )
 
-class ModelController() {
+  class ModelControllerUser() {
 
-  val mongoClient = MongoClient()
-  val db = mongoClient("easywebsites")
+    val mongoClient = MongoClient()
+      val db = mongoClient("easywebsites")
 
-  def getUser () : User = {
-    val collection = db("users")
-    val user = collection.findOne(MongoDBObject("username" -> "admin"))
-    implicit val formats = DefaultFormats
-    val json = parse(user.getOrElse(0).toString)
-    val u = json.extract[User]     
-    return u
+      def getUser () : User = {
+        val collection = db("users")
+          val user = collection.findOne(MongoDBObject("username" -> "admin"))
+          implicit val formats = DefaultFormats
+          val json = parse(user.getOrElse(0).toString)
+          val u = json.extract[User]     
+          return u
+      }
+
+    def insertUser (username : String, password: String, firstname: String, lastname : String) : Unit = {
+      val collection = db("users")
+        val user = MongoDBObject("username" -> username,
+            "password" -> password,
+            "firstname" -> firstname,
+            "lastname" -> lastname)
+        collection.insert(user) 
+    }
+
+    def userExist (username : String) : Boolean = {
+      val collection = db("users")
+        val user = collection.findOne(MongoDBObject("username" -> username))
+        if (user.isEmpty) {
+          return false
+        } else {
+          return true
+        }
+    }
+
+    def matchUser (username : String, password : String) : Boolean = {
+      val collection = db("users")
+        val user = collection.findOne(MongoDBObject("username" -> username,
+                                                    "password" -> password))
+        if (user.isEmpty) {
+          return false
+        } else {
+          return true
+        }
+    }
   }
-
-  def insertUser (username : String, password: String, firstname: String, lastname : String) : Unit = {
-    val collection = db("users")
-    val user = MongoDBObject("username" -> username,
-                             "password" -> password,
-                             "firstname" -> firstname,
-                             "lastname" -> lastname)
-    collection.insert(user) 
-  }
-}

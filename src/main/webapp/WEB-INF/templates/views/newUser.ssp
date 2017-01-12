@@ -1,8 +1,8 @@
 <%@ val Used: Boolean = false %>
 
-#if (Used == true)
+#if (Used)
  <div class="alert alert-danger">
-  Adresse e-mail déjà utilis&eacute;e.Veuillez recommencer avec une adresse diff&eacute;rente.
+  Adresse e-mail d&eacute;j&agrave; utilis&eacute;e.Veuillez recommencer avec une adresse diff&eacute;rente.
 </div> 
 #end
 

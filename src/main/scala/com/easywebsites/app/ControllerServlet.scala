@@ -10,7 +10,7 @@ class ControllerServlet extends EasywebsitesappStack {
 
     get("/") {
       contentType="text/html"
-        ssp("home")
+        ssp("/home")
     }
 
   get("/newUser"){
@@ -27,16 +27,10 @@ class ControllerServlet extends EasywebsitesappStack {
       ssp("/connection")
   }
 
-  post("/connection"){
-    //contentType="text/html"
-
-
-    is_connected = true
-
-
-      <p>${params.get("email")}</p>
-      <p>${params.get("password")}</p>
-      <p>${is_connected}</p>
+  get("/connect/deconnection"){
+    is_connected = false
+      contentType="text/html"
+      ssp("/home")
   }
 
   post("/registration")
@@ -55,10 +49,11 @@ class ControllerServlet extends EasywebsitesappStack {
   post("/connection")
   {
     if (modelUser.matchUser(params("email"), params("password"))) {
+      is_connected = true
         contentType="text/html"
         ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp")
     } else {
-        contentType="text/html"
+      contentType="text/html"
         ssp("/connection", "Unmatch" -> true)
     }
   }

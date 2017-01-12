@@ -11,6 +11,12 @@ case class Project (
     contact: String
     )
 
+case class Counterpart (
+    name: String,
+    description: String,
+    value: Int
+    )
+
   class ModelControllerProject() {
     val mongoClient = MongoClient()
       val db = mongoClient("easywebsites")
@@ -25,7 +31,7 @@ case class Project (
       }
 
 
-    def addCounterpart (name : String, value: String, description: String) : Unit = {
+    def addCounterpart (name : String, value: Int, description: String) : Unit = {
       val collection = db("counterparts")
         val counterpart = MongoDBObject("name" -> name,
             "value" -> value,
@@ -58,4 +64,32 @@ case class Project (
       return result 
     }
 
-  }
+    def getCounterparts () : List[Counterpart] = {
+      val collection = db("counterparts")
+        val counterparts = collection.find()
+        var jsonCounterparts = List[Counterpart]() 
+        for (c <- counterparts) {
+          implicit val formats = DefaultFormats;
+          var json = parse(c.toString);
+          val counterpart = json.extract[Counterpart];
+          jsonCounterparts = counterpart :: jsonCounterparts;  
+        }
+      return jsonCounterparts         
+    }
+  
+    def getCounterpartsItem (item : String) : List[String] = {
+      var result = List[String]()
+        for (c <- getCounterparts()) {
+          if (item == "name")
+            result = c.name :: result
+          else if (item == "description")
+            result = c.description :: result
+          else if (item == "value")
+            result = c.value.toString :: result
+
+        }   
+      return result 
+    }
+
+
+}

@@ -7,14 +7,12 @@
 #if (Add)
 <div class="alert alert-success">Projet cr&eacute;&eacute; avec succ&egrave;s</div>
 #end
-{{range .Projects}}
-<div class="col-md-4" style="border: 1px solid grey; width: 500px; margin: 5px;">
-  #for (n <- ProjectsName; d <- ProjectsDescription)
+#for (n <- ProjectsName; d <- ProjectsDescription)
+  <div class="col-md-4" style="border: 1px solid grey; width: 500px; margin: 5px;">
   <div class="alert alert-info"><h1>Projet - ${n}</h1></div>
   <div><strong>Gain :</strong> {{.Price}}&euro;&#47;mois</div>
   <div><strong>Cr&eacute;&eacute; le :</strong> {{.Creation}}</div>
   <div style="margin: 10px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 10; -webkit-box-orient: vertical;">${d}</div>
-  #end
   #if (Connect)
   <form accept-charset="UTF-8" role="form" method="POST" action="participation">
     <input type="hidden" value={{.Id}} name="participation" id="participation">                
@@ -22,4 +20,4 @@
   </form>
   #end
 </div>
-{{end}}
+#end

@@ -47,11 +47,16 @@ case class User (
     def matchUser (username : String, password : String) : Boolean = {
       val collection = db("users")
         val user = collection.findOne(MongoDBObject("username" -> username,
-                                                    "password" -> password))
+              "password" -> password))
         if (user.isEmpty) {
           return false
         } else {
           return true
         }
     }
+
+
+
+
+
   }

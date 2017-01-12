@@ -11,7 +11,7 @@ class ControllerServlet extends EasywebsitesappStack {
 
   get("/") {
     contentType="text/html"
-      ssp("/home")
+      ssp("/home", "ProjectsName" -> modelProject.getProjectsItem("name"), "ProjectsDescription" -> modelProject.getProjectsItem("description"))
   }
 
   get("/newUser"){

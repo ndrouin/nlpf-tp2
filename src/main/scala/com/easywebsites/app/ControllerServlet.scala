@@ -6,12 +6,12 @@ import com.mongodb.casbah.Imports._
 class ControllerServlet extends EasywebsitesappStack {
 
   var is_connected = false
-    val modelUser = new ModelControllerUser()
+  val modelUser = new ModelControllerUser()
 
-    get("/") {
-      contentType="text/html"
-        ssp("/home")
-    }
+  get("/") {
+    contentType="text/html"
+      ssp("/home")
+  }
 
   get("/newUser"){
     contentType="text/html"
@@ -21,6 +21,24 @@ class ControllerServlet extends EasywebsitesappStack {
       else
         ssp("/newUser", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp")
   }
+
+  get("/newProject"){
+    contentType="text/html"
+
+    val add = false
+    val delete = false
+    val conterparts = model.getCounterparts()
+
+    if (is_connected == true)
+      ssp("/newProject", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp")
+
+  }
+    
+  post("/addProject"){
+    contentType="text/html"
+    model.addProject(params("name"), params("description"), params("author"), params("contact"))
+  }
+
 
   get("/connection"){
     contentType="text/html"
@@ -57,5 +75,19 @@ class ControllerServlet extends EasywebsitesappStack {
         ssp("/connection", "Unmatch" -> true)
     }
   }
+
+
+  post("/connect"){
+    contentType="text/html"
+    ssp("/", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp")
+  }
+
+ /* post("addCounterpart"){
+
+  //Saving of the counterparts
+  model.addCounterpart(params("name"), params("value"), params("description"))
+
+  }*/
+  
 
 }

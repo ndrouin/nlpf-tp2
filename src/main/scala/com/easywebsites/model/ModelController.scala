@@ -55,3 +55,25 @@ case class User (
         }
     }
   }
+
+ 
+  def addProject (name : String, description: String, author: String, contact: String) : Unit = {
+    val collection = db("project")
+    val project = MongoDBObject("name" -> name,
+                             "description" -> description,
+                             "author" -> author,
+                             "contact" -> contact)
+    collection.insert(project) 
+  }
+ 
+
+  def addCounterpart (name : String, value: String, description: String) : Unit = {
+    val collection = db("counterpart")
+    val counterpart = MongoDBObject("name" -> name,
+                             "value" -> value,
+                             "description" -> description)
+    collection.insert(counterpart) 
+  }
+
+ 
+}

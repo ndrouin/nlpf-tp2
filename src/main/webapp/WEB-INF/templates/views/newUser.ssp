@@ -19,10 +19,10 @@
               <form accept-charset="UTF-8" role="form" method="POST" action="registration">                            
                       <fieldset> 
                   <div class="form-group">
-                    <input type="text" maxlength= "255" class="form-control" id="surname" name="surname" placeholder="Nom" required>
+                    <input type="text" maxlength= "255" class="form-control" id="lastname" name="lastname" placeholder="Nom" required>
                   </div>
                   <div class="form-group">
-                    <input type="text" maxlength= "255" class="form-control" id="name" name="name" placeholder="Prénom" required>
+                    <input type="text" maxlength= "255" class="form-control" id="firstname" name="firstname" placeholder="Prénom" required>
                   </div>
                   <div class="form-group">
                     <input type="email" maxlength= "255" class="form-control" id="email" name="email" placeholder="E-mail" required>

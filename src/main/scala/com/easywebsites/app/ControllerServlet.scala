@@ -10,6 +10,7 @@ var is_connected = false
 
   get("/") {
     contentType="text/html"
+    model.insertUser("toto", "toto", "toto")
     ssp("home", "name" -> model.getUser())
   }
 

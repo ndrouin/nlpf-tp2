@@ -23,4 +23,12 @@ class ModelController() {
     val u = json.extract[User]     
     return u.name
   }
+
+  def insertUser (username : String, password: String, name: String) : Unit = {
+    val collection = db("users")
+    val user = MongoDBObject("username" -> username,
+                             "password" -> password,
+                             "name" -> name)
+    collection.insert(user) 
+  }
 }

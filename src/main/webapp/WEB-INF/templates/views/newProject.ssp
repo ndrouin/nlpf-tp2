@@ -1,6 +1,9 @@
 <%@ val Add: Boolean = false %>
 <%@ val Delete: Boolean = false %>
 <%@ val HasOrphanCounterpart: Boolean = false %>
+<%@ val CounterpartsName: List[String] = List[String]() %>
+<%@ val CounterpartsValue: List[String] = List[String]() %>
+<%@ val CounterpartsDescription: List[String] = List[String]() %>
 
 
 
@@ -71,13 +74,13 @@
       </fieldset>                                                          
     </form>   
     <div class="alert alert-info" style="margin-top: 20px;"><h1>Liste des contreparties</h1></div>
-    {{ range .Counterparts }}
-    <div class="alert alert-warning" style="margin-top: 20px;"><h2>{{.Name}} - {{.Value}}&euro;&#47;mois</h2></div>
-    <div><p style="word-wrap: break-word;">{{.Description}}</p></div>
+  #for (n <- CounterpartsName; v <- CounterpartsValue; d <- CounterpartsDescription)  
+  <div class="alert alert-warning" style="margin-top: 20px;"><h2>${n} - ${v}&euro;&#47;mois</h2></div>
+    <div><p style="word-wrap: break-word;">${d}</p></div>
     <form accept-charset="UTF-8" role="form" method="POST" action="deleteCounterpart"> 
       <input type="hidden" id="id" name="id" value="{{.Id}}">
       <input class="btn btn-danger btn-block" style="width: 250px;" type="submit" value="Supprimer"> 
     </form>
-    {{end}}
+    #end
   </div>
 </div> 

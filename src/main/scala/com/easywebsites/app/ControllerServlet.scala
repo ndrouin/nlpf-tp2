@@ -11,8 +11,13 @@ class ControllerServlet extends EasywebsitesappStack {
 
     get("/") {
       contentType="text/html"
-        ssp("/home", "ProjectsName" -> modelProject.getProjectsItem("name"), "ProjectsDescription" -> modelProject.getProjectsItem("description"))
+        ssp("/home", "Projects" -> modelProject.getProjects())
     }
+    
+    get("/connect") {
+      contentType="text/html"
+        ssp("/home", "Projects" -> modelProject.getProjects(), "Connect" -> true)
+}
 
   get("/newUser"){
     contentType="text/html"
@@ -33,7 +38,7 @@ class ControllerServlet extends EasywebsitesappStack {
       if (is_connected == true)
         ssp("/newProject", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp")
       else
-        ssp("/home", "ProjectsName" -> modelProject.getProjectsItem("name"), "ProjectsDescription" -> modelProject.getProjectsItem("description"))
+        ssp("/home", "Projects" -> modelProject.getProjects())
 
   }
 
@@ -41,7 +46,7 @@ class ControllerServlet extends EasywebsitesappStack {
     contentType="text/html"
       modelProject.addProject(params("project_name"), params("description"), params("author_name"), params("email"))
       contentType="text/html"
-      ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "ProjectsName" -> modelProject.getProjectsItem("name"), "ProjectsDescription" -> modelProject.getProjectsItem("description"), "Add" -> true)
+      ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "Projects" -> modelProject.getProjects(), "Add" -> true, "Connect" -> true)
   }
 
 
@@ -53,7 +58,7 @@ class ControllerServlet extends EasywebsitesappStack {
   get("/connect/deconnection"){
     is_connected = false
       contentType="text/html"
-      ssp("/home", "ProjectsName" -> modelProject.getProjectsItem("name"), "ProjectsDescription" -> modelProject.getProjectsItem("description"))
+      ssp("/home", "Projects" -> modelProject.getProjects())
   }
 
   post("/registration")
@@ -65,7 +70,7 @@ class ControllerServlet extends EasywebsitesappStack {
       modelUser.insertUser(params("email"), params("password"), params("firstname"), params("lastname"))
         is_connected = true
         contentType="text/html"
-        ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "ProjectsName" -> modelProject.getProjectsItem("name"), "ProjectsDescription" -> modelProject.getProjectsItem("description"))
+        ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "Projects" -> modelProject.getProjects(), "Connect" -> true)
     }  
   }
 
@@ -74,7 +79,7 @@ class ControllerServlet extends EasywebsitesappStack {
     if (modelUser.matchUser(params("email"), params("password"))) {
       is_connected = true
         contentType="text/html"
-        ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "ProjectsName" -> modelProject.getProjectsItem("name"), "ProjectsDescription" -> modelProject.getProjectsItem("description"))
+        ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "Projects" -> modelProject.getProjects(), "Connect" = true)
     } else {
       contentType="text/html"
         ssp("/connection", "Unmatch" -> true)
@@ -87,7 +92,7 @@ class ControllerServlet extends EasywebsitesappStack {
       if (is_connected == true)
       { 
         modelProject.addProject(params("project_name"), params("description"), params("author_name"), params("email"))
-          ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "ProjectsName" -> modelProject.getProjectsItem("name"), "ProjectsDescription" -> modelProject.getProjectsItem("description"))
+          ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "Projects" -> modelProject.getProjects(), "Connect" -> true)
       }
   }
 
@@ -101,7 +106,7 @@ class ControllerServlet extends EasywebsitesappStack {
   post("/connect/addCounterpart"){
     contentType="text/html"
   modelProject.addCounterpart(params("title"), params("value").toInt, params("description"))
-        ssp("/newProject", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "CounterpartsName" -> modelProject.getCounterpartsItem("name"), "CounterpartsValue" -> modelProject.getCounterpartsItem("value"), "CounterpartsDescription" -> modelProject.getCounterpartsItem("description"), "Add" -> true)
+        ssp("/newProject", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "Counterparts" -> modelProject.getCounterparts(), "Add" -> true)
 
   }
 

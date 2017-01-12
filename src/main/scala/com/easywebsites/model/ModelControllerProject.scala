@@ -40,7 +40,7 @@ case class Counterpart (
     }
 
     def getProjects () : List[Project] = {
-      val collection = db("project")
+      val collection = db("projects")
         val projects = collection.find()
         var jsonProjects = List[Project]() 
         for (p <- projects) {

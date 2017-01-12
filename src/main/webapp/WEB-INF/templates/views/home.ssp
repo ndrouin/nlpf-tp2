@@ -1,4 +1,4 @@
-{<%@ val Add: Boolean = false %>
+<%@ val Add: Boolean = false %>
 <%@ val Connect: Boolean = false %>
 <%@ val HasOrphanCounterpart: Boolean = false %>
 

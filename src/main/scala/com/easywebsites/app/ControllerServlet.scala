@@ -7,6 +7,7 @@ class ControllerServlet extends EasywebsitesappStack {
 
   var is_connected = false
   val modelUser = new ModelControllerUser()
+  val modelProject = new ModelControllerProject()
 
   get("/") {
     contentType="text/html"
@@ -22,7 +23,7 @@ class ControllerServlet extends EasywebsitesappStack {
         ssp("/newUser", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp")
   }
 
-  get("/newProject"){
+  get("/connect/newProject"){
     contentType="text/html"
 
     val add = false
@@ -36,9 +37,11 @@ class ControllerServlet extends EasywebsitesappStack {
 
   }
     
-  post("/addProject"){
+  post("/connect/addProject"){
     contentType="text/html"
-    model.addProject(params("name"), params("description"), params("author"), params("contact"))
+    modelProject.addProject(params("project_name"), params("description"), params("author_name"), params("email"))
+    contentType="text/html"
+      ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "Add" -> true)
   }
 
 
@@ -83,7 +86,7 @@ class ControllerServlet extends EasywebsitesappStack {
       contentType="text/html"
     if (is_connected == true)
     { 
-      model.addProject(params("project_name"), params("description"), params("author_name"), params("email"))
+      modelProject.addProject(params("project_name"), params("description"), params("author_name"), params("email"))
       ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp")
     }
   }

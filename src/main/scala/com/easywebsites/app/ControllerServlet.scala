@@ -4,6 +4,8 @@ import org.scalatra._
 
 class ControllerServlet extends EasywebsitesappStack {
 
+var is_connected = false
+
   get("/") {
     <html>
       <body>
@@ -15,7 +17,11 @@ class ControllerServlet extends EasywebsitesappStack {
 
   get("/newUser"){
   contentType="text/html"
-  ssp("/newUser")
+
+  if (is_connected == false)
+    ssp("/newUser")
+  else
+    ssp("/newUser", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp")
   }
 
   get("/connection"){
@@ -24,13 +30,17 @@ class ControllerServlet extends EasywebsitesappStack {
   }
 
   post("/connection"){
-  contentType="text/html"
+  //contentType="text/html"
 
- 
- /* email := params.get("email")
-  password := params.get("password")
+
+  is_connected = true
+
+  
+  <p>${params.get("email")}</p>
+  <p>${params.get("password")}</p>
+  <p>${is_connected}</p>
   //get result of authentification
-  result := model.Connection(email, password)
+  /*result := model.Connection(email, password)
   if result {
     ctx.Session().Set("isConnected", "true")
     ctx.Redirect("/connect/")
@@ -38,7 +48,7 @@ class ControllerServlet extends EasywebsitesappStack {
     ctx.Render("connection_error.html", nil)
   }*/
 
-  ssp("/connection")
+  //ssp("/connection")
   }
 
 }

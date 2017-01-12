@@ -13,7 +13,7 @@ resources:
     pointer:
       sourceName: ndrouin/nlpf-tp2
     seed:
-      versionName: pre-prod
+      versionName: latest 
   
   - name: docker-img-opts
     type: dockerOptions

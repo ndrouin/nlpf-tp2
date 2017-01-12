@@ -1,13 +1,19 @@
-{{if .Add}}
+<%@ val Add: Boolean = false %>
+<%@ val Delete: Boolean = false %>
+<%@ val HasOrphanCounterpart: Boolean = false %>
+
+
+
+#if (Add == true)
 <div class="alert alert-success">
   Contrepartie ajout&eacute;e
 </div>
-{{end}}
-{{if .Delete}}
+#end
+#if (Delete == true)
 <div class="alert alert-danger">
   Contrepartie supprim&eacute;e
 </div>
-{{end}}
+#end
 <div class="col-md-4" style="margin: 5px;">                                     
   <div class="panel-heading">                                            
     <h3 class="alert alert-info">Mon projet</h3>                              
@@ -29,15 +35,15 @@
         <div class="form-group">
           <input type="email" maxlength="255"  class="form-control" id="email" name="email" placeholder="Contact" required>
         </div>
-        {{if .Delete}}
-        <input class="btn btn-lg btn-success btn-block disabled" type="submit" value="Enregister"> 
-        {{else}}
-        {{if .HasOrphanCounterpart}}
-        <input class="btn btn-lg btn-success btn-block" type="submit" value="Enregister"> 
-        {{else}}
-        <input class="btn btn-lg btn-success btn-block disabled" type="submit" value="Enregister"> 
-        {{end}}
-        {{end}}
+        #if (Delete == true)
+          <input class="btn btn-lg btn-success btn-block disabled" type="submit" value="Enregister"> 
+        #else
+          #if (HasOrphanCounterpart == true)
+            <input class="btn btn-lg btn-success btn-block" type="submit" value="Enregister"> 
+          #else
+            <input class="btn btn-lg btn-success btn-block disabled" type="submit" value="Enregister"> 
+          #end
+        #end
       </fieldset>                                                          
     </form>                                                            
   </div>

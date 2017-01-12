@@ -27,10 +27,12 @@ class ControllerServlet extends EasywebsitesappStack {
 
     val add = false
     val delete = false
-    val conterparts = model.getCounterparts()
+    //val conterparts = model.getCounterparts()
 
     if (is_connected == true)
       ssp("/newProject", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp")
+    else
+      ssp("/home")
 
   }
     
@@ -77,9 +79,20 @@ class ControllerServlet extends EasywebsitesappStack {
   }
 
 
+  post("/addProject"){
+      contentType="text/html"
+    if (is_connected == true)
+    { 
+      model.addProject(params("project_name"), params("description"), params("author_name"), params("email"))
+      ssp("/home", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp")
+    }
+  }
+
+
+
   post("/connect"){
     contentType="text/html"
-    ssp("/", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp")
+    ssp("/", "layout" -> "WEB-INF/templates/layouts/layout_connected.ssp", "Connect" -> true)
   }
 
  /* post("addCounterpart"){

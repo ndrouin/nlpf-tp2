@@ -1,16 +1,15 @@
 package com.easywebsites.app
 
 import org.scalatra._
+import com.mongodb.casbah.Imports._
 
 class ControllerServlet extends EasywebsitesappStack {
 
+  val model = new ModelController()
+
   get("/") {
-    <html>
-      <body>
-        <h1>Hello, world!</h1>
-        Say <a href="hello-scalate">hello to Scalate</a>.
-      </body>
-    </html>
+    contentType="text/html"
+    ssp("home", "name" -> model.getUser())
   }
 
 }

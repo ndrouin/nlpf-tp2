@@ -1,0 +1,20 @@
+<%@ var name: String %>
+<div style="width:800px; text-align:center; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin:auto">
+   <div style="background-color: #4CAF50; color:white; padding:10px; font-size:40px">
+      <b>                                                                          
+       <h1> Projet </h1>                                                   
+     </b>                                                                         
+   </div>                                                                         
+   <div style="padding:10px; width:800px">                                        
+     <p>                                                                          
+       <b>                                                                        
+        ${name}                                                 
+         </br></br>                                                               
+         Description                                                        
+         </br></br>                                                               
+         Money                                                              
+       </b>                                                                       
+     </p>                                                                         
+   </div>                                                                         
+ </div>                                                                           
+</br></br>                                                                                                                                                                  
